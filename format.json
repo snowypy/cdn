@@ -1,0 +1,20 @@
+{
+    "_comment": "IMPORT INTO SHAREX TO USE",
+    "Name": "SNOWY CDN",
+    "RequestType": "POST",
+    "RequestURL": "https://cdn.snowy.codes/api/v1/upload",
+    "FileFormName": "file",
+    "Arguments": {
+      "username": "<USER>",
+      "apiKey": "<APIKEY>"
+    },
+    "Headers": {},
+    "Body": "",
+    "URL": "",
+    "ThumbnailURL": "",
+    "DeletionURL": "",
+    "ErrorMessage": "",
+    "ResponseType": "Text",
+    "RegexList": [],
+    "URLShortener": ""
+  }
