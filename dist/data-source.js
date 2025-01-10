@@ -16,7 +16,7 @@ exports.connectDatabase = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const mongoURI = process.env.MONGO_URI || 'mongodb://root:OulUMKQy1ZFXv8VOYi8rnlYlfPORRWs4yByl3bHNldvGZ0i3dOeC9KdIIDWmWCyP@88.209.197.136:5411/?directConnection=true';
+const mongoURI = process.env.MONGODB_URI || '';
 const connectDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(mongoURI);
