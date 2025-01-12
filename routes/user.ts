@@ -44,4 +44,25 @@ router.post('/login', async (req, res) => {
     res.json({ success: 'Logged in successfully', apiKey: user.apiKey });
 });
 
+router.post('/change-password', async (req, res) => {
+    const { username, password, newPassword, apiKey } = req.body;
+
+    const user = await User.findOne({ username, apiKey });
+
+    if (!user) {
+        res.status(403).json({ error: 'Access denied' });
+        return;
+    }
+
+    if (!bcrypt.compareSync(password, user.password)) {
+        res.status(403).json({ error: 'Invalid password' });
+        return;
+    }
+
+    user.password = bcrypt.hashSync(newPassword, 10);
+    await user.save();
+
+    res.status(200).json({ success: 'Password changed successfully' });
+});
+
 export default router;
