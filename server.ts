@@ -12,13 +12,14 @@ import adminCodeRoutes from './routes/admin/code';
 import adminUserRoutes from './routes/admin/users';
 import fetchRoutes from './routes/fetch';
 import safteyRoutes from './routes/safety';
+import deleteRoutes from './routes/delete';
 import paymentRoutes from './routes/admin/premium/payment';
 
 const app = express();
 app.use(express.json());
 connectDatabase();
 
-app.use('/api/v1', userRoutes, uploadRoutes);
+app.use('/api/v1', userRoutes, uploadRoutes, deleteRoutes);
 app.use('/api/admin', adminCodeRoutes, adminUserRoutes);
 app.use('/api/middleware', safteyRoutes);
 app.use('/api/gateway', paymentRoutes);
