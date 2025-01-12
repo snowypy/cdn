@@ -29,7 +29,7 @@ router.get('/:user/:image', (req, res) => {
 router.post('/getall', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
     const apiKey = req.body.apiKey;
-    const user = yield User_1.default.findOne(username);
+    const user = yield User_1.default.findOne({ username });
     if (!user) {
         res.status(404).json({ error: 'User not found' });
         return;

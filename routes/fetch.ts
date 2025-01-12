@@ -20,7 +20,7 @@ router.post('/getall', async (req, res) => {
     const username = req.body.username;
     const apiKey = req.body.apiKey;
 
-    const user = await User.findOne(username);
+    const user = await User.findOne({username});
 
     if (!user) {
         res.status(404).json({error: 'User not found'});
