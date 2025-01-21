@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const express_1 = __importDefault(require("express"));
 const User_1 = __importDefault(require("../model/User"));
+const filesize_1 = __importDefault(require("../utils/filesize"));
 const router = express_1.default.Router();
 router.get('/:user/:image', (req, res) => {
     const username = req.params.user;
@@ -25,6 +26,16 @@ router.get('/:user/:image', (req, res) => {
             res.status(404).end();
         }
     });
+});
+router.get('/info/:user/:image', (req, res) => {
+    const user = req.params.user;
+    const image = req.params.image;
+    const path = path.join(___dirname, '..', 'uploads', username, image);
+    const fileSize = (0, filesize_1.default)(path);
+    if (!fileSize) {
+        res.status(501).json({ servererror: 'Could not grab file size.' });
+    }
+    res.json({ fileSize });
 });
 router.post('/getall', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
