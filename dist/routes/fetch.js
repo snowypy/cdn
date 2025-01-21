@@ -31,7 +31,18 @@ router.get('/info/:user/:image', (req, res) => {
     const user = req.params.user;
     const image = req.params.image;
     const filePath = path_1.default.join(__dirname, '..', 'uploads', user, image);
-    const fileSize = fs_1.default.statSync(filePath).size;
+    const fileSizeInBytes = fs_1.default.statSync(filePath).size;
+    let fileSize;
+    if (fileSizeInBytes < 1024) {
+        fileSize = `${fileSizeInBytes} B`;
+    }
+    else if (fileSizeInBytes < 1024 * 1024) {
+        fileSize = `${(fileSizeInBytes / 1024).toFixed(2)} KB`;
+    }
+    else {
+        fileSize = `${(fileSizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+    }
+    res.json({ fileSize });
     if (!fileSize) {
         res.status(501).json({ servererror: 'Could not grab file size.' });
     }
