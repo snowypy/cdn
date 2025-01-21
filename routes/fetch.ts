@@ -1,7 +1,7 @@
 import path from "path";
 import express from "express";
 import User from "../model/User";
-import { getFileInfo } from "../utils/filesize"
+import fs from "fs";
 
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.get('/info/:user/:image', (req, res) => {
     const user = req.params.user;
     const image = req.params.image
     const filePath = path.join(__dirname, '..', 'uploads', user, image)
-    const fileSize = getFileInfo(filePath)
+    const fileSize = fs.statSync(filePath).size
 
     if (!fileSize) {
         res.status(501).json({servererror: 'Could not grab file size.'})
