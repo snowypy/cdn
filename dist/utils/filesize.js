@@ -14,7 +14,7 @@ const fs_1 = require("fs");
 function getFileInfo(filePath) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const stats = yield fs_1.promises.stats(filePath);
+            const stats = yield fs_1.promises.stat(filePath);
             return stats.size;
         }
         catch (error) {
