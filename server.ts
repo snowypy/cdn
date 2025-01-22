@@ -14,8 +14,11 @@ import fetchRoutes from './routes/fetch';
 import safteyRoutes from './routes/safety';
 import deleteRoutes from './routes/delete';
 import paymentRoutes from './routes/admin/premium/payment';
+import cors from 'cors';
+
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 connectDatabase();
 
@@ -26,6 +29,7 @@ app.use('/api/gateway', paymentRoutes);
 
 // This is just for serving the files
 app.use('/', fetchRoutes)
+
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`The cdn backend api is now running and is connected to the Mongo User Database`);
