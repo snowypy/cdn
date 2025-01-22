@@ -19,27 +19,28 @@ router.get('/:user/:image', (req, res) => {
 
 router.get('/info/:user/:image', (req, res) => {
     const user = req.params.user;
-    const image = req.params.image
-    const filePath = path.join(__dirname, '..', 'uploads', user, image)
-    const fileSizeInBytes = fs.statSync(filePath).size;
-    let fileSize;
-    if (fileSizeInBytes < 1024) {
-        fileSize = `${fileSizeInBytes} B`;
-    } else if (fileSizeInBytes < 1024 * 1024) {
-        fileSize = `${(fileSizeInBytes / 1024).toFixed(2)} KB`;
-    } else {
-        fileSize = `${(fileSizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+    const image = req.params.image;
+    const filePath = path.join(__dirname, '..', 'uploads', user, image);
+
+    try {
+        const stats = fs.statSync(filePath);
+        const fileSizeInBytes = stats.size;
+        const uploadDate = stats.birthtime;
+
+        let fileSize;
+        if (fileSizeInBytes < 1024) {
+            fileSize = `${fileSizeInBytes} B`;
+        } else if (fileSizeInBytes < 1024 * 1024) {
+            fileSize = `${(fileSizeInBytes / 1024).toFixed(2)} KB`;
+        } else {
+            fileSize = `${(fileSizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+        }
+
+        res.json({ fileSize, user, uploadDate });
+    } catch (err) {
+        res.status(501).json({ servererror: 'cannot grab info' });
     }
-
-    res.json({ fileSize });
-
-    if (!fileSize) {
-        res.status(501).json({servererror: 'Could not grab file size.'})
-    }
-
-    res.json({fileSize})
-
-})
+});
 
 router.post('/getall', async (req, res) => {
     const username = req.body.username;
