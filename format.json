@@ -1,5 +1,4 @@
 {
-    "_comment": "IMPORT INTO SHAREX TO USE",
     "Name": "SNOWY CDN",
     "RequestType": "POST",
     "RequestURL": "https://dk1.snowy.codes/api/v1/upload",
