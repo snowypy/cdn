@@ -9,7 +9,7 @@ const path_1 = __importDefault(require("path"));
 const router = (0, express_1.Router)();
 router.post('/sxcu-config', (req, res) => {
     const { username, apiKey } = req.body;
-    fs_1.default.readFile(path_1.default.join(__dirname, 'format.json'), 'utf8', (err, data) => {
+    fs_1.default.readFile(path_1.default.join(__dirname, '../../../format.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Couldn\'t read config base.', code: err });
         }
