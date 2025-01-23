@@ -14,6 +14,7 @@ import fetchRoutes from './routes/fetch';
 import safteyRoutes from './routes/safety';
 import deleteRoutes from './routes/delete';
 import paymentRoutes from './routes/admin/premium/payment';
+import sxcuConfigRoutes from './routes/sxcu-config';
 import cors from 'cors';
 
 
@@ -22,7 +23,7 @@ app.use(cors());
 app.use(express.json());
 connectDatabase();
 
-app.use('/api/v1', userRoutes, uploadRoutes, deleteRoutes);
+app.use('/api/v1', userRoutes, uploadRoutes, deleteRoutes, sxcuConfigRoutes);
 app.use('/api/admin', adminCodeRoutes, adminUserRoutes);
 app.use('/api/middleware', safteyRoutes);
 app.use('/api/gateway', paymentRoutes);
