@@ -36,12 +36,17 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
-    if (!user || !bcrypt.compareSync(password, user.password)) {
-        res.status(403).json({ error: 'Invalid username or password' });
+    if (!user) {
+        res.status(403).json({ error: 'Account not found.' });
         return;
     }
 
-    res.json({ success: 'Logged in successfully', apiKey: user.apiKey });
+    if (!bcrypt.compareSync(password, user.password)) {
+        res.status(403).json({ error: 'Account found but no password matched.' });
+        return;
+    }
+
+    res.json({ success: `Welcome back, ${username}!`, apiKey: user.apiKey });
 });
 
 router.post('/change-password', async (req, res) => {

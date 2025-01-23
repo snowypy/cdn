@@ -41,11 +41,15 @@ router.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function*
 router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     const user = yield User_1.default.findOne({ username });
-    if (!user || !bcrypt_1.default.compareSync(password, user.password)) {
-        res.status(403).json({ error: 'Invalid username or password' });
+    if (!user) {
+        res.status(403).json({ error: 'Account not found.' });
         return;
     }
-    res.json({ success: 'Logged in successfully', apiKey: user.apiKey });
+    if (!bcrypt_1.default.compareSync(password, user.password)) {
+        res.status(403).json({ error: 'Account found but no password matched.' });
+        return;
+    }
+    res.json({ success: `Welcome back, ${username}!`, apiKey: user.apiKey });
 }));
 router.post('/change-password', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password, newPassword, apiKey } = req.body;
