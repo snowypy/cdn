@@ -9,17 +9,17 @@ router.post('/signup', async (req, res) => {
     const { username, password, inviteCode } = req.body;
 
     if (await User.findOne({ username })) {
-        res.status(400).json({ error: 'There was an issue: username in use' });
+        res.status(400).json({ error: 'An account with that username already exists' });
         return;
     }
 
     const validInviteCode = await InviteCode.findOne({ code: inviteCode });
     if (!validInviteCode) {
-        res.status(400).json({ error: 'There was an issue: invalid invite code' });
+        res.status(400).json({ error: 'That is an invalid invite code.' });
         return;
     }
     if (validInviteCode.currentUses >= validInviteCode.maxUses) {
-        res.status(400).json({ error: 'There was an issue: invite code has reached maximum usage' });
+        res.status(400).json({ error: 'The invite code provided has surpassed its maximum usage.' });
         return;
     }
 
@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
     const newUser = new User({ username, password: hashedPassword, apiKey, inviteCode, role: 'default' });
     await newUser.save();
 
-    res.json({ success: 'You have been registered.' });
+    res.json({ success: 'You have been registered.', apiKey });
 });
 
 router.post('/login', async (req, res) => {

@@ -20,23 +20,23 @@ const router = express_1.default.Router();
 router.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password, inviteCode } = req.body;
     if (yield User_1.default.findOne({ username })) {
-        res.status(400).json({ error: 'There was an issue: username in use' });
+        res.status(400).json({ error: 'An account with that username already exists' });
         return;
     }
     const validInviteCode = yield InviteCode_1.default.findOne({ code: inviteCode });
     if (!validInviteCode) {
-        res.status(400).json({ error: 'There was an issue: invalid invite code' });
+        res.status(400).json({ error: 'That is an invalid invite code.' });
         return;
     }
     if (validInviteCode.currentUses >= validInviteCode.maxUses) {
-        res.status(400).json({ error: 'There was an issue: invite code has reached maximum usage' });
+        res.status(400).json({ error: 'The invite code provided has surpassed its maximum usage.' });
         return;
     }
     const hashedPassword = bcrypt_1.default.hashSync(password, 10);
     const apiKey = username + Date.now();
     const newUser = new User_1.default({ username, password: hashedPassword, apiKey, inviteCode, role: 'default' });
     yield newUser.save();
-    res.json({ success: 'You have been registered.' });
+    res.json({ success: 'You have been registered.', apiKey });
 }));
 router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
