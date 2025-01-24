@@ -24,8 +24,12 @@ router.post('/delete', async (req, res) => {
     await user.save();
 
     const filePath = path.join(__dirname, '..', 'uploads', username, fileName);
+    console.log(`Attempting to delete file at path: ${filePath}`);
     if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
+        console.log(`File deleted: ${filePath}`);
+    } else {
+        console.log(`File not found at path: ${filePath}`);
     }
 
     res.status(200).json({ message: 'File deleted' });
@@ -44,9 +48,12 @@ router.post('/deleteall', async (req, res) => {
 
     user.uploadedFiles.forEach((file: string) => {
         const filePath = path.join(__dirname, '..', 'uploads', username, file);
-        if (fs.existsSync(filePath
-        )) {
+        console.log(`Attempting to delete file at path: ${filePath}`);
+        if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
+            console.log(`File deleted: ${filePath}`);
+        } else {
+            console.log(`File not found at path: ${filePath}`);
         }
     });
 
