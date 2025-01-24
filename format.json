@@ -1,19 +1,13 @@
 {
-    "Name": "SNOWY CDN",
-    "RequestType": "POST",
-    "RequestURL": "https://dk1.snowy.codes/api/v1/upload",
-    "FileFormName": "file",
-    "Arguments": {
-      "username": "<USER>",
-      "apiKey": "<APIKEY>"
-    },
-    "Headers": {},
-    "Body": "",
-    "URL": "",
-    "ThumbnailURL": "",
-    "DeletionURL": "",
-    "ErrorMessage": "",
-    "ResponseType": "Text",
-    "RegexList": [],
-    "URLShortener": ""
-  }
+  "Version": "17.0.0",
+  "Name": "SNOWY CDN",
+  "DestinationType": "ImageUploader, FileUploader",
+  "RequestMethod": "POST",
+  "RequestURL": "https://dk1.snowy.codes/api/v1/upload",
+  "Body": "MultipartFormData",
+  "Arguments": {
+    "username": "<USER>",
+    "apiKey": "<APIKEY"
+  },
+  "FileFormName": "file"
+}
