@@ -34,7 +34,7 @@ router.post('/delete', (req, res) => __awaiter(void 0, void 0, void 0, function*
     if (fs_1.default.existsSync(filePath)) {
         fs_1.default.unlinkSync(filePath);
     }
-    res.status(200).json({ message: 'File deleted' });
+    res.status(200).json({ message: 'The file has been deleted from the file server' });
 }));
 router.post('/deleteall', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, apiKey } = req.body;

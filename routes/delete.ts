@@ -28,7 +28,7 @@ router.post('/delete', async (req, res) => {
         fs.unlinkSync(filePath);
     }
 
-    res.status(200).json({ message: 'File deleted' });
+    res.status(200).json({ message: 'The file has been deleted from the file server' });
 
 });
 
