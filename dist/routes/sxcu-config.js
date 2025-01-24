@@ -17,7 +17,7 @@ router.post('/sxcu-config', (req, res) => {
         res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader('Content-Disposition', 'attachment; filename=config.sxcu');
         res.setHeader('Content-Length', Buffer.byteLength(configContent));
-        res.sendFile(configContent);
+        res.send(configContent);
     });
 });
 exports.default = router;
