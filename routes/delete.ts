@@ -50,7 +50,7 @@ router.post('/deleteall', async (req, res) => {
         }
     });
 
-    res.status(200).json({ message: 'Files all deleted' });
+    res.status(200).json({ message: 'All your files have been permenantly removed from our servers.' });
 
 });
 

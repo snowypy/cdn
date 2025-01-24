@@ -49,6 +49,6 @@ router.post('/deleteall', (req, res) => __awaiter(void 0, void 0, void 0, functi
             fs_1.default.unlinkSync(filePath);
         }
     });
-    res.status(200).json({ message: 'Files all deleted' });
+    res.status(200).json({ message: 'All your files have been permenantly removed from our servers.' });
 }));
 exports.default = router;
