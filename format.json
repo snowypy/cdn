@@ -7,7 +7,7 @@
   "Body": "MultipartFormData",
   "Arguments": {
     "username": "<USER>",
-    "apiKey": "<APIKEY"
+    "apiKey": "<APIKEY>"
   },
   "FileFormName": "file"
 }
