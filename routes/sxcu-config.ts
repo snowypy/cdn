@@ -15,7 +15,7 @@ router.post('/sxcu-config', (req, res) => {
         const configContent = data.replace(/<USER>/g, username).replace(/<APIKEY>/g, apiKey);
 
         res.setHeader('Content-Disposition', 'attachment; filename=config.sxcu');
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Type', 'application/octet-stream');
         
         res.send(configContent);
     });
