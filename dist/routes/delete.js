@@ -24,7 +24,6 @@ router.post('/delete', (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(404).json({ error: 'User not found' });
         return;
     }
-    console.log(`uploaded files: ${user.uploadedFiles}`);
     if (user.uploadedFiles.indexOf(fileName) === -1) {
         res.status(404).json({ error: 'Couldn\'t find file in user db' });
         return;
