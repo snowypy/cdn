@@ -14,8 +14,9 @@ router.post('/sxcu-config', (req, res) => {
             return res.status(500).json({ error: 'Couldn\'t read config base.', code: err });
         }
         const configContent = data.replace(/<USER>/g, username).replace(/<APIKEY>/g, apiKey);
-        res.setHeader('Content-Disposition', 'attachment; filename=config.sxcu');
         res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Disposition', 'attachment; filename=config.sxcu');
+        res.setHeader('Content-Length', Buffer.byteLength(configContent));
         res.send(configContent);
     });
 });
