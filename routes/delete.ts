@@ -42,13 +42,10 @@ router.post('/deleteall', async (req, res) => {
         return;
     }
 
-    user.uploadedFiles.forEach((file: string) => {
-        const filePath = path.join(__dirname, '..', 'uploads', username, file);
-        if (fs.existsSync(filePath
-        )) {
-            fs.unlinkSync(filePath);
-        }
-    });
+    const userFolderPath = path.join(__dirname, '..', 'uploads', username);
+    if (fs.existsSync(userFolderPath)) {
+        fs.rmdirSync(userFolderPath, { recursive: true });
+    }
 
     res.status(200).json({ message: 'All your files have been permenantly removed from our servers.' });
 

@@ -43,12 +43,10 @@ router.post('/deleteall', (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(404).json({ error: 'User not found' });
         return;
     }
-    user.uploadedFiles.forEach((file) => {
-        const filePath = path_1.default.join(__dirname, '..', 'uploads', username, file);
-        if (fs_1.default.existsSync(filePath)) {
-            fs_1.default.unlinkSync(filePath);
-        }
-    });
+    const userFolderPath = path_1.default.join(__dirname, '..', 'uploads', username);
+    if (fs_1.default.existsSync(userFolderPath)) {
+        fs_1.default.rmdirSync(userFolderPath, { recursive: true });
+    }
     res.status(200).json({ message: 'All your files have been permenantly removed from our servers.' });
 }));
 exports.default = router;
