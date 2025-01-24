@@ -46,8 +46,10 @@ router.post('/deleteall', async (req, res) => {
     if (fs.existsSync(userFolderPath)) {
         fs.rmdirSync(userFolderPath, { recursive: true });
     }
+    user.uploadedFiles = [];
+    await user.save();
 
-    res.status(200).json({ message: 'All your files have been permenantly removed from our servers.' });
+    res.status(200).json({ message: 'All your files have been permanently removed from our servers.' });
 
 });
 
